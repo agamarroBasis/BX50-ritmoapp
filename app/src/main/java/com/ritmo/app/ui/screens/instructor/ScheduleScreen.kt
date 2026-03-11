@@ -7,7 +7,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.ritmo.app.ui.theme.SurfaceHighlightLight
+import com.ritmo.app.ui.theme.SurfaceLight
 
 @Composable
 fun ScheduleScreen() {
@@ -21,7 +21,7 @@ fun ScheduleScreen() {
             items(days) { day ->
                 Card(
                     colors = CardDefaults.cardColors(
-                        containerColor = if (day == "LUNES") MaterialTheme.colorScheme.primary else SurfaceHighlightLight,
+                        containerColor = if (day == "LUNES") MaterialTheme.colorScheme.primary else SurfaceLight,
                         contentColor = if (day == "LUNES") MaterialTheme.colorScheme.onPrimary else MaterialTheme.colorScheme.onSurface
                     ),
                     modifier = Modifier.padding(end = 8.dp)
@@ -42,7 +42,7 @@ fun ScheduleScreen() {
 @Composable
 fun ClassCardMock(name: String, time: String, type: String, room: String) {
     Card(
-        colors = CardDefaults.cardColors(containerColor = SurfaceHighlightLight),
+        colors = CardDefaults.cardColors(containerColor = SurfaceLight),
         modifier = Modifier.fillMaxWidth()
     ) {
         Column(modifier = Modifier.padding(16.dp)) {

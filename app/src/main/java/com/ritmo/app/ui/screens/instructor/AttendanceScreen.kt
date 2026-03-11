@@ -15,7 +15,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.ritmo.app.ui.components.RitmoPrimaryButton
 import com.ritmo.app.ui.theme.ElectricCoral
-import com.ritmo.app.ui.theme.SurfaceHighlightLight
+import com.ritmo.app.ui.theme.SurfaceLight
 
 data class Student(val id: Int, val name: String, var isPresent: Boolean? = null)
 
@@ -79,7 +79,7 @@ fun StudentAttendanceRow(student: Student, onStatusChange: (Boolean) -> Unit) {
         modifier = Modifier
             .fillMaxWidth()
             .padding(vertical = 4.dp),
-        colors = CardDefaults.cardColors(containerColor = SurfaceHighlightLight)
+        colors = CardDefaults.cardColors(containerColor = SurfaceLight)
     ) {
         Row(
             modifier = Modifier

@@ -43,7 +43,8 @@ fun AdminStudentsScreen() {
         // Students Table Placeholder
         Card(
             modifier = Modifier.fillMaxWidth(),
-            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant)
+            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+            elevation = CardDefaults.cardElevation(defaultElevation = 1.dp)
         ) {
             Column(modifier = Modifier.padding(16.dp)) {
                 Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
@@ -51,7 +52,7 @@ fun AdminStudentsScreen() {
                     Text(text = "Clase", style = MaterialTheme.typography.labelMedium, modifier = Modifier.weight(1f))
                     Text(text = "Estado", style = MaterialTheme.typography.labelMedium, modifier = Modifier.weight(1f))
                 }
-                Divider(modifier = Modifier.padding(vertical = 8.dp))
+                HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
                 StudentRow("Juan Pérez", "Salsa", "Activo")
                 StudentRow("María Gómez", "Bachata", "Inactivo")
                 StudentRow("Carlos López", "Ballet", "Activo")

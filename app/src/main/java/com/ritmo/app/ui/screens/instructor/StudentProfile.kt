@@ -10,7 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import com.ritmo.app.ui.theme.AmberGold
-import com.ritmo.app.ui.theme.SurfaceDark
+import com.ritmo.app.ui.theme.SurfaceLight
 
 @Composable
 fun StudentProfile(studentName: String) {
@@ -22,7 +22,7 @@ fun StudentProfile(studentName: String) {
             modifier = Modifier
                 .size(100.dp)
                 .clip(CircleShape)
-                .background(SurfaceDark),
+                .background(SurfaceLight),
             contentAlignment = Alignment.Center
         ) {
             Text(studentName.first().toString(), style = MaterialTheme.typography.displayLarge)
@@ -38,7 +38,7 @@ fun StudentProfile(studentName: String) {
         Spacer(modifier = Modifier.height(32.dp))
         
         Card(
-            colors = CardDefaults.cardColors(containerColor = SurfaceDark),
+            colors = CardDefaults.cardColors(containerColor = SurfaceLight),
             modifier = Modifier.fillMaxWidth()
         ) {
             Column(modifier = Modifier.padding(16.dp)) {

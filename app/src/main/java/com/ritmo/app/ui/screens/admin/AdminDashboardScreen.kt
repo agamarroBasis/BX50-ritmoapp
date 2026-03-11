@@ -47,7 +47,8 @@ fun AdminDashboardScreen() {
         // Recent Activity Mock List
         Card(
             modifier = Modifier.fillMaxWidth(),
-            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant)
+            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+            elevation = CardDefaults.cardElevation(defaultElevation = 1.dp)
         ) {
             Column(modifier = Modifier.padding(16.dp)) {
                 Text(text = "Pago recibido: Juan Pérez ($50)", style = MaterialTheme.typography.bodyMedium)
@@ -64,9 +65,9 @@ fun AdminDashboardScreen() {
 fun KpiCard(title: String, value: String, isPrimary: Boolean = false) {
     Card(
         colors = CardDefaults.cardColors(
-            containerColor = if (isPrimary) ElectricCoral.copy(alpha = 0.1f) else MaterialTheme.colorScheme.surfaceVariant
+            containerColor = if (isPrimary) ElectricCoral.copy(alpha = 0.1f) else MaterialTheme.colorScheme.surface
         ),
-        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
+        elevation = CardDefaults.cardElevation(defaultElevation = 1.dp),
         modifier = Modifier.fillMaxWidth()
     ) {
         Column(modifier = Modifier.padding(16.dp)) {

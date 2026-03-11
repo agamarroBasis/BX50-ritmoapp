@@ -32,13 +32,14 @@ fun AdminClassesScreen() {
         // Classes List Placeholder
         Card(
             modifier = Modifier.fillMaxWidth(),
-            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant)
+            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+            elevation = CardDefaults.cardElevation(defaultElevation = 1.dp)
         ) {
             Column(modifier = Modifier.padding(16.dp)) {
                 ClassItem("Salsa Cubana", "Lunes 18:00", "Andrés", "Sala A")
-                Divider(modifier = Modifier.padding(vertical = 8.dp))
+                HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
                 ClassItem("Bachata", "Martes 19:30", "Laura", "Sala B")
-                Divider(modifier = Modifier.padding(vertical = 8.dp))
+                HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
                 ClassItem("Ballet Infantil", "Miércoles 16:00", "Sofía", "Sala C")
             }
         }

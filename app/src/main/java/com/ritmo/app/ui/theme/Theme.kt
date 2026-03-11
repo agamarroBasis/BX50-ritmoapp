@@ -2,40 +2,41 @@ package com.ritmo.app.ui.theme
 
 import android.app.Activity
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.darkColorScheme
+import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
 
-private val DarkColorScheme = darkColorScheme(
+private val LightColorScheme = lightColorScheme(
     primary = ElectricCoral,
-    onPrimary = DeepBlack,
+    onPrimary = Color.White,
     secondary = AmberGold,
-    onSecondary = DeepBlack,
+    onSecondary = Color.White,
     tertiary = AmberGold,
-    background = DeepBlack,
+    background = LightBackground,
     onBackground = TextPrimary,
-    surface = SurfaceDark,
+    surface = SurfaceLight,
     onSurface = TextPrimary,
-    surfaceVariant = SurfaceHighlight,
+    surfaceVariant = SurfaceLight,
     onSurfaceVariant = TextSecondary,
     error = ElectricCoral,
-    onError = TextPrimary
+    onError = Color.White
 )
 
 @Composable
 fun RitmoTheme(
     content: @Composable () -> Unit
 ) {
-    val colorScheme = DarkColorScheme
+    val colorScheme = LightColorScheme
     val view = LocalView.current
     if (!view.isInEditMode) {
         SideEffect {
             val window = (view.context as Activity).window
             window.statusBarColor = colorScheme.background.toArgb()
-            WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = false
+            WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = true
         }
     }
 

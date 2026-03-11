@@ -23,7 +23,8 @@ fun AdminFinanceScreen() {
 
         Card(
             modifier = Modifier.fillMaxWidth(),
-            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant)
+            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+            elevation = CardDefaults.cardElevation(defaultElevation = 1.dp)
         ) {
             Column(modifier = Modifier.padding(16.dp)) {
                 Text(text = "Ingresos del Mes", style = MaterialTheme.typography.labelMedium)
@@ -46,7 +47,8 @@ fun AdminFinanceScreen() {
         // Table Placeholder
         Card(
             modifier = Modifier.fillMaxWidth(),
-            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant)
+            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+            elevation = CardDefaults.cardElevation(defaultElevation = 1.dp)
         ) {
             Column(modifier = Modifier.padding(16.dp)) {
                 Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
@@ -54,7 +56,7 @@ fun AdminFinanceScreen() {
                     Text(text = "Monto", style = MaterialTheme.typography.labelMedium, modifier = Modifier.weight(1f))
                     Text(text = "Estado", style = MaterialTheme.typography.labelMedium, modifier = Modifier.weight(1f))
                 }
-                Divider(modifier = Modifier.padding(vertical = 8.dp))
+                HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
                 PaymentRow("Juan Pérez", "$50", "Pagado")
                 PaymentRow("Ana Gómez", "$50", "Pendiente")
                 PaymentRow("Luis Martínez", "$100", "Pagado")

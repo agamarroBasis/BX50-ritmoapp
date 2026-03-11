@@ -12,7 +12,7 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.ritmo.app.ui.theme.ElectricCoral
-import com.ritmo.app.ui.theme.SurfaceDark
+import com.ritmo.app.ui.theme.SurfaceLight
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -49,7 +49,7 @@ fun LoginScreen(onLoginSuccess: (String) -> Unit) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .background(SurfaceDark, RoundedCornerShape(12.dp))
+                .background(SurfaceLight, RoundedCornerShape(12.dp))
                 .padding(4.dp),
             horizontalArrangement = Arrangement.SpaceEvenly
         ) {
@@ -80,9 +80,9 @@ fun LoginScreen(onLoginSuccess: (String) -> Unit) {
             label = { Text("Correo electrónico") },
             modifier = Modifier.fillMaxWidth(),
             shape = RoundedCornerShape(12.dp),
-            colors = TextFieldDefaults.outlinedTextFieldColors(
+            colors = OutlinedTextFieldDefaults.colors(
                 focusedBorderColor = ElectricCoral,
-                unfocusedBorderColor = SurfaceDark
+                unfocusedBorderColor = androidx.compose.ui.graphics.Color.LightGray
             )
         )
 
@@ -95,9 +95,9 @@ fun LoginScreen(onLoginSuccess: (String) -> Unit) {
             visualTransformation = PasswordVisualTransformation(),
             modifier = Modifier.fillMaxWidth(),
             shape = RoundedCornerShape(12.dp),
-            colors = TextFieldDefaults.outlinedTextFieldColors(
+            colors = OutlinedTextFieldDefaults.colors(
                 focusedBorderColor = ElectricCoral,
-                unfocusedBorderColor = SurfaceDark
+                unfocusedBorderColor = androidx.compose.ui.graphics.Color.LightGray
             )
         )
 

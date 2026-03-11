@@ -10,7 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.ritmo.app.ui.theme.DeepBlack
+import com.ritmo.app.ui.theme.TextPrimary
 import com.ritmo.app.ui.theme.ElectricCoral
 
 @Composable
@@ -50,7 +50,7 @@ fun RitmoPrimaryButton(
             .height(56.dp),
         colors = ButtonDefaults.buttonColors(
             containerColor = ElectricCoral,
-            contentColor = DeepBlack
+            contentColor = TextPrimary
         ),
         shape = RoundedCornerShape(16.dp),
         enabled = enabled

@@ -7,7 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.ritmo.app.ui.components.RitmoPrimaryButton
-import com.ritmo.app.ui.theme.SurfaceDark
+import com.ritmo.app.ui.theme.SurfaceLight
 
 @Composable
 fun InstructorDashboard(onNavigateToAttendance: () -> Unit) {
@@ -30,7 +30,7 @@ fun InstructorDashboard(onNavigateToAttendance: () -> Unit) {
         Spacer(modifier = Modifier.height(32.dp))
         
         Card(
-            colors = CardDefaults.cardColors(containerColor = SurfaceDark),
+            colors = CardDefaults.cardColors(containerColor = SurfaceLight),
             shape = RoundedCornerShape(24.dp),
             modifier = Modifier.fillMaxWidth()
         ) {

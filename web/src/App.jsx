@@ -4,6 +4,7 @@ import Dashboard from './Dashboard';
 import Attendance from './Attendance';
 import AdminLayout from './admin/AdminLayout';
 import AdminDashboard from './admin/AdminDashboard';
+import AdminCalendar from './admin/AdminCalendar';
 import AdminStudents from './admin/AdminStudents';
 import AdminInstructors from './admin/AdminInstructors';
 import AdminClasses from './admin/AdminClasses';
@@ -24,11 +25,12 @@ function App() {
         {/* Admin Portal */}
         <Route path="/admin" element={<AdminLayout />}>
           <Route index element={<Navigate to="/admin/dashboard" replace />} />
-          <Route path="dashboard" element={<AdminDashboard />} />
-          <Route path="students" element={<AdminStudents />} />
+          <Route path="dashboard"   element={<AdminDashboard />} />
+          <Route path="calendar"    element={<AdminCalendar />} />
+          <Route path="students"    element={<AdminStudents />} />
           <Route path="instructors" element={<AdminInstructors />} />
-          <Route path="classes" element={<AdminClasses />} />
-          <Route path="finance" element={<AdminFinance />} />
+          <Route path="classes"     element={<AdminClasses />} />
+          <Route path="finance"     element={<AdminFinance />} />
         </Route>
       </Routes>
     </Router>

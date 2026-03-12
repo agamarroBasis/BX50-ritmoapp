@@ -1,121 +1,208 @@
 package com.ritmo.app.ui.screens.login
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.ritmo.app.ui.theme.ElectricCoral
-import com.ritmo.app.ui.theme.SurfaceLight
+import com.ritmo.app.ui.theme.*
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LoginScreen(onLoginSuccess: (String) -> Unit) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
-    var selectedRole by remember { mutableStateOf("Admin") }
+    var selectedRole by remember { mutableStateOf("Instructor") }
+
+    val isAdmin = selectedRole == "Admin"
+    val accentColor = if (isAdmin) IndigoAccent else ElectricCoral
+    val accentBg = if (isAdmin) IndigoBg else CoralBg
 
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(24.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
+            .background(LightBackground)
+            .verticalScroll(rememberScrollState())
+            .padding(horizontal = 24.dp)
+            .padding(top = 60.dp, bottom = 40.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        // App Title/Logo Area
+        // ── Logo ──
+        Box(
+            modifier = Modifier
+                .size(72.dp)
+                .clip(RoundedCornerShape(22.dp))
+                .background(
+                    Brush.linearGradient(
+                        listOf(accentColor, accentColor.copy(alpha = 0.75f))
+                    )
+                ),
+            contentAlignment = Alignment.Center
+        ) {
+            Text(text = "R", fontSize = 36.sp, fontWeight = FontWeight.Black, color = Color.White)
+        }
+
+        Spacer(Modifier.height(14.dp))
+
         Text(
             text = "RITMO",
-            style = MaterialTheme.typography.displayLarge.copy(
-                fontWeight = FontWeight.Black,
-                letterSpacing = 4.sp
-            ),
-            color = MaterialTheme.colorScheme.onBackground
+            fontSize = 26.sp,
+            fontWeight = FontWeight.Black,
+            letterSpacing = 6.sp,
+            color = TextPrimary
         )
         Text(
-            text = "ACADEMIA DE BAILE",
-            style = MaterialTheme.typography.labelLarge.copy(letterSpacing = 2.sp),
-            color = ElectricCoral
+            text = "Academia de Baile",
+            fontSize = 12.sp,
+            color = TextSecondary,
+            fontWeight = FontWeight.Medium,
+            letterSpacing = 2.sp
         )
 
-        Spacer(modifier = Modifier.height(48.dp))
+        Spacer(Modifier.height(36.dp))
 
-        // Role Selector
+        // ── Role Selector ──
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .background(SurfaceLight, RoundedCornerShape(12.dp))
-                .padding(4.dp),
-            horizontalArrangement = Arrangement.SpaceEvenly
+                .clip(RoundedCornerShape(12.dp))
+                .background(BorderColor.copy(alpha = 0.6f))
+                .padding(4.dp)
         ) {
-            val roles = listOf("Instructor", "Admin")
-            roles.forEach { role ->
-                val isSelected = selectedRole == role
-                Button(
-                    onClick = { selectedRole = role },
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = if (isSelected) ElectricCoral else androidx.compose.ui.graphics.Color.Transparent,
-                        contentColor = if (isSelected) MaterialTheme.colorScheme.onPrimary else MaterialTheme.colorScheme.onSurfaceVariant
-                    ),
-                    modifier = Modifier.weight(1f),
-                    shape = RoundedCornerShape(8.dp),
-                    contentPadding = PaddingValues(vertical = 12.dp)
+            listOf("Instructor", "Admin").forEach { role ->
+                val selected = selectedRole == role
+                Box(
+                    modifier = Modifier
+                        .weight(1f)
+                        .clip(RoundedCornerShape(9.dp))
+                        .background(if (selected) SurfaceLight else Color.Transparent)
+                        .clickable { selectedRole = role }
+                        .padding(vertical = 11.dp),
+                    contentAlignment = Alignment.Center
                 ) {
-                    Text(text = role, fontWeight = FontWeight.Bold)
+                    Text(
+                        text = role,
+                        fontSize = 14.sp,
+                        fontWeight = if (selected) FontWeight.Bold else FontWeight.Medium,
+                        color = if (selected) accentColor else TextSecondary
+                    )
                 }
             }
         }
 
-        Spacer(modifier = Modifier.height(32.dp))
+        Spacer(Modifier.height(24.dp))
 
-        // Input Fields
-        OutlinedTextField(
-            value = email,
-            onValueChange = { email = it },
-            label = { Text("Correo electrónico") },
+        // ── Login Card ──
+        Card(
             modifier = Modifier.fillMaxWidth(),
-            shape = RoundedCornerShape(12.dp),
-            colors = OutlinedTextFieldDefaults.colors(
-                focusedBorderColor = ElectricCoral,
-                unfocusedBorderColor = androidx.compose.ui.graphics.Color.LightGray
-            )
-        )
+            shape = RoundedCornerShape(20.dp),
+            colors = CardDefaults.cardColors(containerColor = SurfaceLight),
+            elevation = CardDefaults.cardElevation(defaultElevation = 0.dp)
+        ) {
+            Column(
+                modifier = Modifier.padding(20.dp),
+                verticalArrangement = Arrangement.spacedBy(16.dp)
+            ) {
+                Text(
+                    text = "Iniciar sesión",
+                    fontSize = 17.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = TextPrimary
+                )
 
-        Spacer(modifier = Modifier.height(16.dp))
+                OutlinedTextField(
+                    value = email,
+                    onValueChange = { email = it },
+                    label = { Text("Correo electrónico") },
+                    modifier = Modifier.fillMaxWidth(),
+                    shape = RoundedCornerShape(12.dp),
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
+                    singleLine = true,
+                    colors = OutlinedTextFieldDefaults.colors(
+                        focusedBorderColor = accentColor,
+                        focusedLabelColor = accentColor,
+                        unfocusedBorderColor = BorderColor
+                    )
+                )
 
-        OutlinedTextField(
-            value = password,
-            onValueChange = { password = it },
-            label = { Text("Contraseña") },
-            visualTransformation = PasswordVisualTransformation(),
-            modifier = Modifier.fillMaxWidth(),
-            shape = RoundedCornerShape(12.dp),
-            colors = OutlinedTextFieldDefaults.colors(
-                focusedBorderColor = ElectricCoral,
-                unfocusedBorderColor = androidx.compose.ui.graphics.Color.LightGray
-            )
-        )
+                OutlinedTextField(
+                    value = password,
+                    onValueChange = { password = it },
+                    label = { Text("Contraseña") },
+                    visualTransformation = PasswordVisualTransformation(),
+                    modifier = Modifier.fillMaxWidth(),
+                    shape = RoundedCornerShape(12.dp),
+                    singleLine = true,
+                    colors = OutlinedTextFieldDefaults.colors(
+                        focusedBorderColor = accentColor,
+                        focusedLabelColor = accentColor,
+                        unfocusedBorderColor = BorderColor
+                    )
+                )
 
-        Spacer(modifier = Modifier.height(48.dp))
+                Text(
+                    text = "¿Olvidaste tu contraseña?",
+                    fontSize = 13.sp,
+                    color = accentColor,
+                    fontWeight = FontWeight.SemiBold,
+                    modifier = Modifier
+                        .align(Alignment.End)
+                        .clickable {}
+                )
+            }
+        }
 
-        // Login Button
+        Spacer(Modifier.height(20.dp))
+
+        // ── Submit ──
         Button(
             onClick = { onLoginSuccess(selectedRole) },
             modifier = Modifier
                 .fillMaxWidth()
-                .height(56.dp),
-            colors = ButtonDefaults.buttonColors(containerColor = ElectricCoral),
-            shape = RoundedCornerShape(16.dp)
+                .height(52.dp),
+            shape = RoundedCornerShape(14.dp),
+            colors = ButtonDefaults.buttonColors(containerColor = accentColor),
+            elevation = ButtonDefaults.buttonElevation(defaultElevation = 0.dp)
+        ) {
+            Text(text = "Iniciar sesión", fontSize = 15.sp, fontWeight = FontWeight.Bold)
+        }
+
+        Spacer(Modifier.height(20.dp))
+
+        // ── Hint box ──
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .clip(RoundedCornerShape(12.dp))
+                .background(accentBg)
+                .padding(horizontal = 16.dp, vertical = 12.dp)
         ) {
             Text(
-                text = "INICIAR SESIÓN",
-                style = MaterialTheme.typography.labelLarge.copy(fontSize = 16.sp),
-                color = MaterialTheme.colorScheme.onPrimary
+                text = if (isAdmin)
+                    "Acceso restringido al equipo administrativo de Ritmo."
+                else
+                    "Portal exclusivo para instructores certificados de Ritmo.",
+                fontSize = 12.sp,
+                color = accentColor.copy(alpha = 0.85f),
+                textAlign = TextAlign.Center,
+                lineHeight = 18.sp,
+                fontWeight = FontWeight.Medium,
+                modifier = Modifier.fillMaxWidth()
             )
         }
     }

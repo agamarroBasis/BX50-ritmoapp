@@ -1,20 +1,21 @@
-/* ─── Login Page ─── */
+/* ─── Login Page — Metronic Light Style ─── */
 .login-page {
   display: flex;
   min-height: 100vh;
   width: 100%;
+  background: var(--bg);
 }
 
-/* ── Brand panel (left 45%) ── */
+/* ── Brand panel (left 42%) ── */
 .login-brand {
-  flex: 0 0 45%;
-  background: linear-gradient(145deg, #1a0a00 0%, #3d1206 40%, #FF4D2E 100%);
+  flex: 0 0 42%;
+  background: linear-gradient(145deg, #1a1040 0%, #312e7a 45%, #6366f1 100%);
   position: relative;
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 48px;
+  padding: 56px 48px;
 }
 
 .brand-content {
@@ -25,84 +26,92 @@
   align-items: center;
   text-align: center;
   color: #fff;
-  gap: 16px;
+  gap: 18px;
 }
 
 .brand-logo-wrap {
-  width: 80px;
-  height: 80px;
-  border-radius: 24px;
-  background: rgba(255,255,255,0.15);
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(255,255,255,0.25);
+  width: 88px;
+  height: 88px;
+  border-radius: 28px;
+  background: rgba(255,255,255,0.12);
+  backdrop-filter: blur(10px);
+  border: 1.5px solid rgba(255,255,255,0.2);
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 8px;
+  margin-bottom: 4px;
+  box-shadow: 0 8px 32px rgba(0,0,0,.2);
 }
 
 .brand-logo-text {
-  font-size: 40px;
+  font-size: 44px;
   font-weight: 900;
   color: #fff;
   line-height: 1;
 }
 
 .brand-name {
-  font-size: 48px;
+  font-size: 46px;
   font-weight: 900;
-  letter-spacing: 6px;
+  letter-spacing: 8px;
   color: #fff;
   line-height: 1;
 }
 
 .brand-tagline {
-  font-size: 16px;
+  font-size: 13px;
   font-weight: 600;
-  letter-spacing: 3px;
+  letter-spacing: 4px;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.7);
+  color: rgba(255,255,255,0.6);
 }
 
 .brand-sub {
   font-size: 15px;
-  color: rgba(255,255,255,0.6);
+  color: rgba(255,255,255,0.55);
   max-width: 260px;
-  line-height: 1.6;
-  margin-top: 8px;
+  line-height: 1.7;
+  margin-top: 4px;
 }
 
 .brand-stats {
   display: flex;
-  gap: 32px;
-  margin-top: 32px;
+  gap: 0;
+  margin-top: 36px;
   padding-top: 32px;
-  border-top: 1px solid rgba(255,255,255,0.2);
+  border-top: 1px solid rgba(255,255,255,0.15);
   width: 100%;
   justify-content: center;
 }
 
 .brand-stat {
+  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 4px;
+  padding: 0 16px;
+  border-right: 1px solid rgba(255,255,255,0.12);
 }
+
+.brand-stat:last-child { border-right: none; }
 
 .stat-num {
   font-size: 28px;
   font-weight: 800;
   color: #fff;
+  line-height: 1;
 }
 
 .stat-lbl {
-  font-size: 12px;
-  color: rgba(255,255,255,0.6);
+  font-size: 11px;
+  color: rgba(255,255,255,0.5);
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 1.2px;
+  font-weight: 600;
 }
 
-/* Decorative circles */
+/* Decorative blobs */
 .brand-deco {
   position: absolute;
   inset: 0;
@@ -113,81 +122,84 @@
 .deco-circle {
   position: absolute;
   border-radius: 50%;
-  background: rgba(255,255,255,0.04);
 }
 
-.c1 { width: 400px; height: 400px; top: -100px; right: -100px; }
-.c2 { width: 300px; height: 300px; bottom: -80px; left: -80px; }
-.c3 { width: 200px; height: 200px; top: 40%; left: -60px; background: rgba(245,166,35,0.12); }
+.c1 { width: 420px; height: 420px; top: -120px; right: -120px; background: rgba(255,255,255,0.04); }
+.c2 { width: 320px; height: 320px; bottom: -90px; left: -90px; background: rgba(255,255,255,0.04); }
+.c3 { width: 180px; height: 180px; top: 42%; left: -50px; background: rgba(245,166,35,0.1); }
 
-/* ── Form panel (right 55%) ── */
+/* ── Form panel (right 58%) ── */
 .login-form-panel {
   flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 48px 32px;
+  padding: 56px 48px;
   background: var(--surface);
 }
 
 .login-card {
   width: 100%;
-  max-width: 420px;
+  max-width: 400px;
   display: flex;
   flex-direction: column;
   gap: 28px;
 }
 
 .login-card-header h2 {
-  font-size: 28px;
+  font-size: 26px;
   font-weight: 800;
   color: var(--text);
   margin-bottom: 6px;
+  letter-spacing: -0.3px;
 }
 
 .login-card-header p {
-  font-size: 15px;
+  font-size: 14px;
   color: var(--text-muted);
+  font-weight: 500;
 }
 
 /* Role tabs */
 .role-tabs {
   display: flex;
   background: var(--bg);
-  border-radius: var(--radius);
+  border-radius: 10px;
   padding: 4px;
   gap: 4px;
+  border: 1px solid var(--border);
 }
 
 .role-tab {
   flex: 1;
-  padding: 10px 16px;
+  padding: 9px 16px;
   border: none;
-  border-radius: calc(var(--radius) - 4px);
+  border-radius: 7px;
   background: transparent;
-  font-size: 14px;
+  font-size: 13.5px;
   font-weight: 600;
   color: var(--text-muted);
   transition: all 0.2s ease;
+  letter-spacing: 0.1px;
 }
 
 .role-tab.active {
   background: var(--surface);
-  color: var(--coral);
-  box-shadow: var(--shadow-sm);
+  color: var(--admin-accent);
+  box-shadow: 0 1px 6px rgba(0,0,0,.08);
 }
 
 /* Form */
 .login-form {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 18px;
 }
 
 .form-field {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 7px;
 }
 
 .field-label-row {
@@ -197,44 +209,54 @@
 }
 
 .form-field label {
-  font-size: 14px;
-  font-weight: 600;
+  font-size: 13px;
+  font-weight: 700;
   color: var(--text);
+  letter-spacing: 0.1px;
 }
 
 .forgot-link {
   background: none;
   border: none;
-  font-size: 13px;
-  color: var(--coral);
-  font-weight: 500;
+  font-size: 12.5px;
+  color: var(--admin-accent);
+  font-weight: 600;
   cursor: pointer;
   padding: 0;
+  transition: opacity 0.15s;
 }
 
+.forgot-link:hover { opacity: 0.75; }
+
 .form-field input {
-  padding: 14px 16px;
-  border-radius: var(--radius);
+  padding: 12px 16px;
+  border-radius: 9px;
   border: 1.5px solid var(--border);
   background: var(--bg);
   color: var(--text);
-  font-size: 15px;
-  transition: border-color 0.2s, box-shadow 0.2s;
+  font-size: 14px;
+  transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
   outline: none;
+  font-weight: 500;
+}
+
+.form-field input::placeholder {
+  color: var(--text-muted);
+  font-weight: 400;
 }
 
 .form-field input:focus {
-  border-color: var(--coral);
+  border-color: var(--admin-accent);
   background: var(--surface);
-  box-shadow: 0 0 0 3px rgba(255,77,46,0.1);
+  box-shadow: 0 0 0 3px rgba(99,102,241,.1);
 }
 
 /* Submit button */
 .submit-btn {
-  padding: 15px 24px;
+  padding: 14px 24px;
   border: none;
-  border-radius: var(--radius);
-  font-size: 15px;
+  border-radius: 9px;
+  font-size: 14px;
   font-weight: 700;
   letter-spacing: 0.3px;
   color: #fff;
@@ -242,37 +264,36 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 52px;
+  min-height: 50px;
+  margin-top: 4px;
 }
 
 .submit-btn.instructor {
   background: linear-gradient(135deg, var(--coral) 0%, #ff7354 100%);
-  box-shadow: 0 4px 16px rgba(255,77,46,0.35);
+  box-shadow: 0 4px 16px rgba(255,77,46,.3);
 }
 
 .submit-btn.instructor:hover:not(:disabled) {
   transform: translateY(-1px);
-  box-shadow: 0 6px 20px rgba(255,77,46,0.45);
+  box-shadow: 0 6px 20px rgba(255,77,46,.4);
 }
 
 .submit-btn.admin {
   background: linear-gradient(135deg, #6366F1 0%, #818CF8 100%);
-  box-shadow: 0 4px 16px rgba(99,102,241,0.35);
+  box-shadow: 0 4px 16px rgba(99,102,241,.3);
 }
 
 .submit-btn.admin:hover:not(:disabled) {
   transform: translateY(-1px);
-  box-shadow: 0 6px 20px rgba(99,102,241,0.45);
+  box-shadow: 0 6px 20px rgba(99,102,241,.4);
 }
 
-.submit-btn.loading {
-  opacity: 0.8;
-}
+.submit-btn.loading { opacity: 0.8; }
 
 .spinner {
   width: 20px;
   height: 20px;
-  border: 2.5px solid rgba(255,255,255,0.3);
+  border: 2.5px solid rgba(255,255,255,.3);
   border-top-color: #fff;
   border-radius: 50%;
   animation: spin 0.7s linear infinite;
@@ -281,28 +302,30 @@
 @keyframes spin { to { transform: rotate(360deg); } }
 
 .login-hint {
-  font-size: 13px;
+  font-size: 12.5px;
   color: var(--text-muted);
   text-align: center;
-  line-height: 1.5;
+  line-height: 1.6;
+  font-weight: 500;
+  padding: 14px 16px;
+  background: var(--bg);
+  border-radius: 9px;
+  border: 1px solid var(--border);
 }
 
-/* ── Responsive: hide brand panel on mobile ── */
-@media (max-width: 768px) {
+/* ── Responsive ── */
+@media (max-width: 800px) {
   .login-brand { display: none; }
-  .login-form-panel { padding: 32px 20px; }
-
-  .login-card {
-    max-width: 100%;
-  }
+  .login-form-panel { padding: 36px 24px; }
+  .login-card { max-width: 100%; }
 
   .login-card::before {
     content: 'RITMO';
     display: block;
-    font-size: 36px;
+    font-size: 32px;
     font-weight: 900;
-    letter-spacing: 5px;
-    color: var(--coral);
+    letter-spacing: 6px;
+    color: var(--admin-accent);
     text-align: center;
     margin-bottom: 8px;
   }

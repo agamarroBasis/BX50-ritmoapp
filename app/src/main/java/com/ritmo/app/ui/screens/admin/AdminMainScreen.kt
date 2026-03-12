@@ -1,103 +1,69 @@
 package com.ritmo.app.ui.screens.admin
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
-import com.ritmo.app.ui.theme.ElectricCoral
-import kotlinx.coroutines.launch
+import androidx.compose.ui.unit.sp
+import com.ritmo.app.ui.theme.*
 
-object AdminScreenRoute {
-    const val Dashboard = "admin_dashboard"
-    const val Finance = "admin_finance"
-    const val Students = "admin_students"
-    const val Instructors = "admin_instructors"
-    const val Classes = "admin_classes"
-}
+private enum class AdminTab { DASHBOARD, STUDENTS, INSTRUCTORS, CLASSES, FINANCE }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AdminMainScreen() {
-    val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
-    val scope = rememberCoroutineScope()
-    val navController = rememberNavController()
+fun AdminMainScreen(onLogout: () -> Unit = {}) {
+    var currentTab by remember { mutableStateOf(AdminTab.DASHBOARD) }
 
-    val menuItems = listOf(
-        Pair("Dashboard", AdminScreenRoute.Dashboard),
-        Pair("Contabilidad", AdminScreenRoute.Finance),
-        Pair("Alumnos", AdminScreenRoute.Students),
-        Pair("Instructores", AdminScreenRoute.Instructors),
-        Pair("Clases", AdminScreenRoute.Classes)
-    )
-
-    var currentRoute by remember { mutableStateOf(AdminScreenRoute.Dashboard) }
-
-    ModalNavigationDrawer(
-        drawerState = drawerState,
-        drawerContent = {
-            ModalDrawerSheet {
-                Spacer(Modifier.height(12.dp))
-                menuItems.forEach { item ->
-                    NavigationDrawerItem(
-                        label = { Text(item.first) },
-                        selected = item.second == currentRoute,
-                        onClick = {
-                            scope.launch { drawerState.close() }
-                            currentRoute = item.second
-                            navController.navigate(item.second) {
-                                popUpTo(navController.graph.startDestinationId)
-                                launchSingleTop = true
-                            }
+    Scaffold(
+        containerColor = LightBackground,
+        bottomBar = {
+            NavigationBar(
+                containerColor = SurfaceLight,
+                tonalElevation = 0.dp,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clip(RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp))
+            ) {
+                val items = listOf(
+                    Triple(AdminTab.DASHBOARD,   "Dashboard",   "📊"),
+                    Triple(AdminTab.STUDENTS,    "Alumnos",     "👥"),
+                    Triple(AdminTab.INSTRUCTORS, "Instructores","🎓"),
+                    Triple(AdminTab.CLASSES,     "Clases",      "📅"),
+                    Triple(AdminTab.FINANCE,     "Finanzas",    "💰")
+                )
+                items.forEach { (tab, label, icon) ->
+                    NavigationBarItem(
+                        selected = currentTab == tab,
+                        onClick = { currentTab = tab },
+                        icon = { Text(icon, fontSize = 18.sp) },
+                        label = {
+                            Text(
+                                label,
+                                fontSize = 10.sp,
+                                fontWeight = if (currentTab == tab) FontWeight.Bold else FontWeight.Medium
+                            )
                         },
-                        colors = NavigationDrawerItemDefaults.colors(
-                            selectedContainerColor = ElectricCoral.copy(alpha = 0.2f),
-                            selectedTextColor = ElectricCoral
-                        ),
-                        modifier = Modifier.padding(NavigationDrawerItemDefaults.ItemPadding)
+                        colors = NavigationBarItemDefaults.colors(
+                            selectedTextColor = IndigoAccent,
+                            unselectedTextColor = TextSecondary,
+                            indicatorColor = IndigoBg
+                        )
                     )
                 }
             }
         }
-    ) {
-        Scaffold(
-            topBar = {
-                TopAppBar(
-                    title = { Text("Panel Administrativo") },
-                    navigationIcon = {
-                        IconButton(onClick = { scope.launch { drawerState.open() } }) {
-                            Text("☰", style = MaterialTheme.typography.titleLarge)
-                        }
-                    },
-                    colors = TopAppBarDefaults.topAppBarColors(
-                        containerColor = MaterialTheme.colorScheme.background
-                    )
-                )
+    ) { innerPadding ->
+        Box(modifier = Modifier.padding(innerPadding)) {
+            when (currentTab) {
+                AdminTab.DASHBOARD   -> AdminDashboardScreen()
+                AdminTab.STUDENTS    -> AdminStudentsScreen()
+                AdminTab.INSTRUCTORS -> AdminInstructorsScreen()
+                AdminTab.CLASSES     -> AdminClassesScreen()
+                AdminTab.FINANCE     -> AdminFinanceScreen()
             }
-        ) { innerPadding ->
-            AdminNavHost(
-                navController = navController,
-                modifier = Modifier.padding(innerPadding)
-            )
         }
-    }
-}
-
-@Composable
-fun AdminNavHost(navController: NavHostController, modifier: Modifier = Modifier) {
-    NavHost(
-        navController = navController,
-        startDestination = AdminScreenRoute.Dashboard,
-        modifier = modifier
-    ) {
-        composable(AdminScreenRoute.Dashboard) { AdminDashboardScreen() }
-        composable(AdminScreenRoute.Finance) { AdminFinanceScreen() }
-        composable(AdminScreenRoute.Students) { AdminStudentsScreen() }
-        composable(AdminScreenRoute.Instructors) { AdminInstructorsScreen() }
-        composable(AdminScreenRoute.Classes) { AdminClassesScreen() }
     }
 }
